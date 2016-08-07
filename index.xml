@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>5 volts electronics</title>
+    <link>https://vahidtaghiloo.github.io/</link>
+    <description>Recent content on 5 volts electronics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>v.taghiloo@gmail.com (Vahid)</managingEditor>
+    <webMaster>v.taghiloo@gmail.com (Vahid)</webMaster>
+    <lastBuildDate>Fri, 05 Aug 2016 17:24:37 -0400</lastBuildDate>
+    <atom:link href="https://vahidtaghiloo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About Me</title>
+      <link>https://vahidtaghiloo.github.io/page/about/</link>
+      <pubDate>Fri, 05 Aug 2016 17:24:37 -0400</pubDate>
+      <author>v.taghiloo@gmail.com (Vahid)</author>
+      <guid>https://vahidtaghiloo.github.io/page/about/</guid>
+      <description>
+
+&lt;p&gt;Hi, my name is Vahid. I am an electronics enthusiast from &lt;a href=&#34;https://en.wikipedia.org/wiki/Iran&#34;&gt;IRAN&lt;/a&gt;. I like making things, cooking, reading, watching movies and animes, python, GNU/Linux, FOSS and lots of bunch of stuff. My native language is not English so if you see any misspelling or grammatical errors please feel free to tell me.&lt;/p&gt;
+
+&lt;h3 id=&#34;contact-me&#34;&gt;Contact me&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;mailto:email@domain.com&#34;&gt;v.taghiloo@gmail.com&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>First post on my blog</title>
+      <link>https://vahidtaghiloo.github.io/post/First%20post%20on%20my%20blog/</link>
+      <pubDate>Wed, 27 Jul 2016 20:47:19 -0400</pubDate>
+      <author>v.taghiloo@gmail.com (Vahid)</author>
+      <guid>https://vahidtaghiloo.github.io/post/First%20post%20on%20my%20blog/</guid>
+      <description>&lt;p&gt;Ok, this is my first post on my first blog. I&amp;rsquo;m using github/hugo/github_pages to create it (I will definitely write a post about &lt;a href=&#34;https://gohugo.io/&#34;&gt;hugo&lt;/a&gt;). In this blog I&amp;rsquo;ll write about my projects, working with electronic modules, GNU/linux and my hobbies. I&amp;rsquo;m still learning stuff but bear with me on this, eventually I will get better. My native language is not english so if you see any misspelling or grammatical errors please feel free to tell me.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
