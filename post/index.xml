@@ -8,8 +8,229 @@
     <language>en-us</language>
     <managingEditor>v.taghiloo@gmail.com (Vahid)</managingEditor>
     <webMaster>v.taghiloo@gmail.com (Vahid)</webMaster>
-    <lastBuildDate>Wed, 27 Jul 2016 20:47:19 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 16 Aug 2016 08:55:21 -0400</lastBuildDate>
     <atom:link href="https://vahidtaghiloo.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Set udev rules for bus pirate on Linux</title>
+      <link>https://vahidtaghiloo.github.io/post/Set%20udev%20rules%20for%20bus%20pirate%20on%20Linux/</link>
+      <pubDate>Tue, 16 Aug 2016 08:55:21 -0400</pubDate>
+      <author>v.taghiloo@gmail.com (Vahid)</author>
+      <guid>https://vahidtaghiloo.github.io/post/Set%20udev%20rules%20for%20bus%20pirate%20on%20Linux/</guid>
+      <description>&lt;p&gt;USB serial (UART) peripherals show up as ttyUSB on most Linux distros. The first peripheral is ttyUSB0, the second is ttyUSB1 and so on. On Windows os  they are named com1, com2 and &amp;hellip; . If you want to have a constant name for every peripheral, for example /dev/buspirtae, you can set udev rules. Every USB device has a vendor id and a product id.
+&lt;pre&gt;&lt;code&gt;$lsusb
+Bus 002 Device 002: ID &lt;strong&gt;05ac:8406&lt;/strong&gt; Apple, Inc.
+Bus 002 Device 001: ID &lt;strong&gt;1d6b:0003&lt;/strong&gt; Linux Foundation 3.0 root hub
+Bus 001 Device 003: ID &lt;strong&gt;05ac:0291&lt;/strong&gt; Apple, Inc.
+Bus 001 Device 006: ID &lt;strong&gt;05ac:828f&lt;/strong&gt; Apple, Inc.
+Bus 001 Device 002: ID &lt;strong&gt;0a5c:4500&lt;/strong&gt; Broadcom Corp. BCM2046B1 USB 2.0 Hub (part of BCM2046 Bluetooth)
+Bus 001 Device 007: ID &lt;strong&gt;0403:6001&lt;/strong&gt; Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
+Bus 001 Device 001: ID &lt;strong&gt;1d6b:0002&lt;/strong&gt; Linux Foundation 2.0 root hub
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;Hackaday website has a good tutorial to write udev rules &lt;a href=&#34;http://hackaday.com/2009/09/18/how-to-write-udev-rules/&#34;&gt;here&lt;/a&gt;. To set udev rules for buspirate in command line do:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$udevadm info -a -p $(udevadm info -q path -n /dev/ttyUSB0)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;a lot of text appears on screen. You only want to find the line containing &lt;code&gt;ATTRS{serial}=&#39;XXXXXXXX&#39;&lt;/code&gt;. now:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$sudo nano /etc/udev/rules.d/61-buspirate.rules&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SUBSYSTEM==&#34;tty&#34;, ATTRS{idVendor}==&#34;0403&#34;, ATTRS{idProduct}==&#34;6001&#34;, \
+ATTRS{serial}==&#34;AH01EH85&#34;, MODE:=&#34;0666&#34;, \
+SYMLINK+=&#34;buspirate&#34;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;pay attention that you should write your device serial number and not mine. You can write any name in front of SYMLINK and the device would show up as that name under /dev. Save and exit by ctrl+o, hit enter and then ctrl+x. now:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$sudo udevadm control --reload-rules&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;reconnect bus pirate to usb port and type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ls -l /dev
+total 0
+crw-------  1 root  root       10, 235 Aug 16 08:52 autofs
+drwxr-xr-x  2 root  root           140 Aug 16 08:52 block
+drwxr-xr-x  2 root  root            80 Aug 16 08:52 bsg
+crw-------  1 root  root       10, 234 Aug 16 08:52 btrfs-control
+drwxr-xr-x  3 root  root            60 Aug 16 08:52 bus
+lrwxrwxrwx  1 root  root             7 Aug 16 09:23 buspirate -&gt; ttyUSB0
+drwxr-xr-x  2 root  root          3120 Aug 16 09:23 char
+crw-------  1 root  root        5,   1 Aug 16 08:52 console
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See that bus pirate is linked to ttyUSB0.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;note:&lt;/strong&gt; Using ATTRS{serial}==&amp;ldquo;XXXXXXXX&amp;rdquo; is somehow important because FT232 is a well known IC and lots of devices use that like arduino NG, some programmer boards, USB to UART bridges and &amp;hellip;. So for every device use its own serial number.&lt;/p&gt;
+
+&lt;p&gt;At the end watch the asciinema cast for a real live terminal.&lt;/p&gt;
+
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/4xx9764g2vthafmxwlgcuzs9d.js&#34; id=&#34;asciicast-4xx9764g2vthafmxwlgcuzs9d&#34; async&gt;&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What is bus pirate and how to connect it to linux</title>
+      <link>https://vahidtaghiloo.github.io/post/What%20is%20bus%20pirate%20and%20how%20to%20connect%20it%20to%20linux/</link>
+      <pubDate>Wed, 10 Aug 2016 19:18:34 -0400</pubDate>
+      <author>v.taghiloo@gmail.com (Vahid)</author>
+      <guid>https://vahidtaghiloo.github.io/post/What%20is%20bus%20pirate%20and%20how%20to%20connect%20it%20to%20linux/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;https://vahidtaghiloo.github.io/img/bus-pirate.png&#34; alt=&#34;bus-pirate&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The bus pirate is an open source serial terminal bridge developed by &lt;a href=&#34;http://dangerousprototypes.com&#34;&gt;Dangerous Prototypes&lt;/a&gt; that talks to electronic stuff through the serial port (or usb port). It supports variety of protocols like 1-wire, I2C, SPI, JTAG, asynchronous serial (UART), raw 2-wire and 3-wire and HD44780 LCD controller. The board is based on a PIC24F microcontroller and has different versions. the current recommended version is 3.6, there is also a version 4 and version 5 (not fully developed yet). The represented numbers on the pictur are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;mini USB port&lt;/li&gt;
+&lt;li&gt;USB RX/TX LED indicator&lt;/li&gt;
+&lt;li&gt;Power indicator LED (probably green)&lt;/li&gt;
+&lt;li&gt;Mode indicator LED&lt;/li&gt;
+&lt;li&gt;Voltage regulator indicator LED&lt;/li&gt;
+&lt;li&gt;Output connector (2X5 IDC connector)&lt;/li&gt;
+&lt;li&gt;PIC programming connector (in case something goes wrong, probably you won&amp;rsquo;t use it at all)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;working-with-bus-pirate&#34;&gt;Working with bus pirate&lt;/h2&gt;
+
+&lt;p&gt;OK, first you should get a bus pirate board. You can buy it from Dangerous Prototypes or their vendors, you can get a free pcb (parts not included) again from Dangerous Prototypes or you can make your own board because the schematic and pcb are available. I couldn&amp;rsquo;t buy it so I decided to make the pcb myself. As you see in the picture it is a bit different from the original one because I wanted to easily hand solder it so I used larger packages for parts.&lt;/p&gt;
+
+&lt;p&gt;bus pirate talks to your computer via a FTDI USB to UART interface IC. We type commands into a serial terminal on the computer, the commands go to the bus pirate, it communicates to the outside world in the selected protocol (based on the commands we typed earlier) and returns result to the pc.&lt;/p&gt;
+
+&lt;p&gt;bus pirate has two modes :&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;User Terminal mode (user types all the commands himself)&lt;/li&gt;
+&lt;li&gt;Binary Scripting Mode (work is done automatically with python or perl scripts)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In these series of tutorials we use the first method. for more information on binary mode visit &lt;a href=&#34;https://learn.sparkfun.com/tutorials/bus-pirate-v36a-hookup-guide#bsm&#34;&gt;Bus Pirate v3.6a Hookup Guide&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Because bus pirate has a serial interface, it works with many platforms, pc, mac, linux, even android. My main os is debian so I&amp;rsquo;m using it. We also need a terminal emulator. In linux world there are some choices : screen, miniterm, minicom, picocom, &amp;hellip;. In most distros screen is already installed. If not, use &lt;code&gt;$sudo apt-get install screen&lt;/code&gt; , or use whatever package manager your distro has. For the first step we want to know if bus pirate works correctly or not. The bus pirate firmware has a self test mode. connect the board to the usb port and see if it is recognized. For instance in my laptop :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$lsusb
+Bus 002 Device 002: ID 05ac:8406 Apple, Inc.
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 003: ID 05ac:0291 Apple, Inc.
+Bus 001 Device 006: ID 05ac:828f Apple, Inc.
+Bus 001 Device 002: ID 0a5c:4500 Broadcom Corp. BCM2046B1 USB 2.0 Hub (part of BCM2046 Bluetooth)
+Bus 001 Device 007: ID 0403:6001 Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See that a Future Technology Device FT232 USB-Serial (UART) is recognized by pc. The first serial device connected to linux is named ttyUSB0 or in some distros ttyACM0, obviously the next serial device would be ttyUSB1 and so on. To find out the serial device name type &lt;code&gt;$sudo cat /var/log/messages | tail&lt;/code&gt; in the terminal or simply type &lt;code&gt;$dmesg | tail&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$sudo cat /var/log/messages | tail
+Aug 10 18:02:37 debian kernel: [ 2445.106227] usbserial: USB Serial support registered for generic
+Aug 10 18:02:37 debian kernel: [ 2445.111095] usbcore: registered new interface driver ftdi_sio
+Aug 10 18:02:37 debian kernel: [ 2445.111125] usbserial: USB Serial support registered for FTDI USB Serial Device
+Aug 10 18:02:37 debian kernel: [ 2445.111340] ftdi_sio 1-1:1.0: FTDI USB Serial Device converter detected
+Aug 10 18:02:37 debian kernel: [ 2445.111453] usb 1-1: Detected FT232RL
+Aug 10 18:02:37 debian kernel: [ 2445.111460] usb 1-1: Number of endpoints 2
+Aug 10 18:02:37 debian kernel: [ 2445.111467] usb 1-1: Endpoint 1 MaxPacketSize 64
+Aug 10 18:02:37 debian kernel: [ 2445.111473] usb 1-1: Endpoint 2 MaxPacketSize 64
+Aug 10 18:02:37 debian kernel: [ 2445.111479] usb 1-1: Setting MaxPacketSize 64
+Aug 10 18:02:37 debian kernel: [ 2445.111842] usb 1-1: FTDI USB Serial Device converter now attached to ttyUSB0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;$dmesg | tail
+[ 2445.106227] usbserial: USB Serial support registered for generic
+[ 2445.111095] usbcore: registered new interface driver ftdi_sio
+[ 2445.111125] usbserial: USB Serial support registered for FTDI USB Serial Device
+[ 2445.111340] ftdi_sio 1-1:1.0: FTDI USB Serial Device converter detected
+[ 2445.111453] usb 1-1: Detected FT232RL
+[ 2445.111460] usb 1-1: Number of endpoints 2
+[ 2445.111467] usb 1-1: Endpoint 1 MaxPacketSize 64
+[ 2445.111473] usb 1-1: Endpoint 2 MaxPacketSize 64
+[ 2445.111479] usb 1-1: Setting MaxPacketSize 64
+[ 2445.111842] usb 1-1: FTDI USB Serial Device converter now attached to ttyUSB0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Both commands show that ftdi is connected to ttyUSB0. Now type &lt;code&gt;$sudo screen /dev/ttyUSB0 115200 8N1&lt;/code&gt; and hit enter 2 times. Immediately terminal shows a prompt screen like bellow waiting for commands.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$sudo screen /dev/ttyUSB0 115200 8N1
+HiZ&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The initial mode of bus pirate is HiZ (hi impedance) and It means all the inputs are disabled for protection. If you have come this far, probably bus pirate works correctly. The commands are fairly simple: i shows information (firmware version, device id, &amp;hellip;) about bus pirate, ? shows a detailed help menu and m changes bus pirate mode.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;HiZ&amp;gt;i
+Bus Pirate v3.5
+Firmware v6.2-beta1 r1981  Bootloader v4.4
+DEVID:0x0447 REVID:0x3046 (24FJ64GA002 B8)
+http://dangerousprototypes.com
+HiZ&amp;gt;?
+ General                                        Protocol interaction
+ ---------------------------------------------------------------------------
+ ?      This help                       (0)     List current macros
+ =X/|X  Converts X/reverse X            (x)     Macro x
+ ~      Selftest                        [       Start
+ #      Reset the BP                    ]       Stop
+ $      Jump to bootloader              {       Start with read
+ &amp;amp;/%    Delay 1 us/ms                   }       Stop
+ a/A/@  AUXPIN (low/HI/READ)            &amp;quot;abc&amp;quot;   Send string
+ b      Set baudrate                    123
+ c/C    AUX assignment (aux/CS)         0x123
+ d/D    Measure ADC (once/CONT.)        0b110   Send value
+ f      Measure frequency               r       Read
+ g/S    Generate PWM/Servo              /       CLK hi
+ h      Commandhistory                  \       CLK lo
+ i      Versioninfo/statusinfo          ^       CLK tick
+ l/L    Bitorder (msb/LSB)              -       DAT hi
+ m      Change mode                     _       DAT lo
+ o      Set output type                 .       DAT read
+ p/P    Pullup resistors (off/ON)       !       Bit read
+ s      Script engine                   :       Repeat e.g. r:10
+ v      Show volts/states               ;       Bits to read/write e.g. 0x55;2
+ w/W    PSU (off/ON)            &amp;lt;x&amp;gt;/&amp;lt;x= &amp;gt;/&amp;lt;0&amp;gt;   Usermacro x/assign x/list all
+HiZ&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To self-test the bus pirate, just connect jumpers to the output connector according to the picture and then type ~ (tilda) character in bus pirate command prompt and hit space key to continue.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vahidtaghiloo.github.io/img/bus-pirate-selftest.png&#34; alt=&#34;bus-pirate-selftest&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;MODE LED OK
+PULLUP H OK
+PULLUP L OK
+VREG OK
+ADC and supply
+5V(4.93) OK
+VPU(4.93) OK
+3.3V(3.21) OK
+ADC(3.20) OK
+Bus high
+MOSI OK
+CLK OK
+MISO OK
+CS OK
+Bus Hi-Z 0
+MOSI OK
+CLK OK
+MISO OK
+CS OK
+Bus Hi-Z 1
+MOSI OK
+CLK OK
+MISO OK
+CS OK
+MODE and VREG LEDs should be on!
+Any key to exit
+Found 0 errors.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Well, everything seems OK. To exit screen session hit ctrl+a and then ctrl+d.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;note:&lt;/strong&gt; &lt;em&gt;as you see copying and pasting terminal output is really ugly and unnecessary, so in the next series of tutorials I will record screencasts instead.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;update&lt;/strong&gt; Now you can watch the asciicast for this tutorial.&lt;/p&gt;
+
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://asciinema.org/a/b0dwoat6ylpe055749bwffq6p.js&#34; id=&#34;asciicast-b0dwoat6ylpe055749bwffq6p&#34; async&gt;&lt;/script&gt;
+</description>
+    </item>
     
     <item>
       <title>First post on my blog</title>

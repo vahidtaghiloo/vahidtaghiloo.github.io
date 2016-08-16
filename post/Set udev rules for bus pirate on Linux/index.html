@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>5 volts electronics</title>
+  <title>Set udev rules for bus pirate on Linux</title>
 
   <meta name="author" content="Vahid" />
   
@@ -24,9 +24,9 @@
   <link rel="stylesheet" href="https://vahidtaghiloo.github.io/css/pygment_highlights.css" />
   
   
-  <meta property="og:title" content="5 volts electronics" />
+  <meta property="og:title" content="Set udev rules for bus pirate on Linux" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="//" />
+  <meta property="og:url" content="/" />
   <meta property="og:image" content="img/avatar-icon.png" />
   
 </head>
@@ -78,87 +78,114 @@
 </nav>
 
 
-    <header class="header-section ">
-      <div class="intro-header no-img">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="page-heading">
-                <h1>5 volts electronics</h1>
-                
-              </div>
-            </div>
-          </div>
+    <div role="main" class="container main-content">
+
+      
+        
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Set udev rules for bus pirate on Linux</h1>
+      
+      
+      
+      <span class="post-meta">Posted on August 16, 2016</span>
+      
         </div>
       </div>
-    </header>
+    </div>
+  </div>
+</div>
+</header>
 
 
-    <div role="main" class="container">
-      <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-          <div class="posts-list">
-            
-            
-            <article class="post-preview">
-              <a href="https://vahidtaghiloo.github.io/post/Set%20udev%20rules%20for%20bus%20pirate%20on%20Linux/">
-          	  <h2 class="post-title">Set udev rules for bus pirate on Linux</h2>
-          	
-          	    
-              </a>
 
-              <p class="post-meta">
-                Posted on August 16, 2016
-              </p>
-            
-              <div class="post-entry">
-                USB serial (UART) peripherals show up as ttyUSB on most Linux distros. The first peripheral is ttyUSB0, the second is ttyUSB1 and so on. On Windows os they are named com1, com2 and &hellip; . If you want to have a constant name for every peripheral, for example /dev/buspirtae, you can set udev rules. Every USB device has a vendor id and a product id. $lsusb Bus 002 Device 002: ID 05ac:8406 Apple, Inc.
-          	  <a href="https://vahidtaghiloo.github.io/post/Set%20udev%20rules%20for%20bus%20pirate%20on%20Linux/" class="post-read-more">[Read&nbsp;More]</a>
-              </div>
-            
-             </article>
-            
-            <article class="post-preview">
-              <a href="https://vahidtaghiloo.github.io/post/What%20is%20bus%20pirate%20and%20how%20to%20connect%20it%20to%20linux/">
-          	  <h2 class="post-title">What is bus pirate and how to connect it to linux</h2>
-          	
-          	    
-              </a>
 
-              <p class="post-meta">
-                Posted on August 10, 2016
-              </p>
-            
-              <div class="post-entry">
-                The bus pirate is an open source serial terminal bridge developed by Dangerous Prototypes that talks to electronic stuff through the serial port (or usb port). It supports variety of protocols like 1-wire, I2C, SPI, JTAG, asynchronous serial (UART), raw 2-wire and 3-wire and HD44780 LCD controller. The board is based on a PIC24F microcontroller and has different versions. the current recommended version is 3.6, there is also a version 4 and version 5 (not fully developed yet).
-          	  <a href="https://vahidtaghiloo.github.io/post/What%20is%20bus%20pirate%20and%20how%20to%20connect%20it%20to%20linux/" class="post-read-more">[Read&nbsp;More]</a>
-              </div>
-            
-             </article>
-            
-            <article class="post-preview">
-              <a href="https://vahidtaghiloo.github.io/post/First%20post%20on%20my%20blog/">
-          	  <h2 class="post-title">First post on my blog</h2>
-          	
-          	    
-              </a>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+          <p>USB serial (UART) peripherals show up as ttyUSB on most Linux distros. The first peripheral is ttyUSB0, the second is ttyUSB1 and so on. On Windows os  they are named com1, com2 and &hellip; . If you want to have a constant name for every peripheral, for example /dev/buspirtae, you can set udev rules. Every USB device has a vendor id and a product id.
+<pre><code>$lsusb
+Bus 002 Device 002: ID <strong>05ac:8406</strong> Apple, Inc.
+Bus 002 Device 001: ID <strong>1d6b:0003</strong> Linux Foundation 3.0 root hub
+Bus 001 Device 003: ID <strong>05ac:0291</strong> Apple, Inc.
+Bus 001 Device 006: ID <strong>05ac:828f</strong> Apple, Inc.
+Bus 001 Device 002: ID <strong>0a5c:4500</strong> Broadcom Corp. BCM2046B1 USB 2.0 Hub (part of BCM2046 Bluetooth)
+Bus 001 Device 007: ID <strong>0403:6001</strong> Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
+Bus 001 Device 001: ID <strong>1d6b:0002</strong> Linux Foundation 2.0 root hub
+</code></pre></p>
 
-              <p class="post-meta">
-                Posted on July 27, 2016
-              </p>
-            
-              <div class="post-entry">
-                Ok, this is my first post on my first blog. I&rsquo;m using github/hugo/github_pages to create it (I will definitely write a post about hugo). In this blog I&rsquo;ll write about my projects, working with electronic modules, GNU/linux and my hobbies. I&rsquo;m still learning stuff but bear with me on this, eventually I will get better. My native language is not english so if you see any misspelling or grammatical errors please feel free to tell me.
-          	  <a href="https://vahidtaghiloo.github.io/post/First%20post%20on%20my%20blog/" class="post-read-more">[Read&nbsp;More]</a>
-              </div>
-            
-             </article>
-            
-          </div>
+<p>Hackaday website has a good tutorial to write udev rules <a href="http://hackaday.com/2009/09/18/how-to-write-udev-rules/">here</a>. To set udev rules for buspirate in command line do:</p>
 
-          
-        </div>
-      </div>
+<pre><code>$udevadm info -a -p $(udevadm info -q path -n /dev/ttyUSB0)
+</code></pre>
+
+<p>a lot of text appears on screen. You only want to find the line containing <code>ATTRS{serial}='XXXXXXXX'</code>. now:</p>
+
+<pre><code>$sudo nano /etc/udev/rules.d/61-buspirate.rules</code></pre>
+
+<p>and type:</p>
+
+<pre><code>SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", \
+ATTRS{serial}=="AH01EH85", MODE:="0666", \
+SYMLINK+="buspirate"
+</code></pre>
+
+<p>pay attention that you should write your device serial number and not mine. You can write any name in front of SYMLINK and the device would show up as that name under /dev. Save and exit by ctrl+o, hit enter and then ctrl+x. now:</p>
+
+<pre><code>$sudo udevadm control --reload-rules</code></pre>
+
+<p>reconnect bus pirate to usb port and type:</p>
+
+<pre><code>$ls -l /dev
+total 0
+crw-------  1 root  root       10, 235 Aug 16 08:52 autofs
+drwxr-xr-x  2 root  root           140 Aug 16 08:52 block
+drwxr-xr-x  2 root  root            80 Aug 16 08:52 bsg
+crw-------  1 root  root       10, 234 Aug 16 08:52 btrfs-control
+drwxr-xr-x  3 root  root            60 Aug 16 08:52 bus
+lrwxrwxrwx  1 root  root             7 Aug 16 09:23 buspirate -> ttyUSB0
+drwxr-xr-x  2 root  root          3120 Aug 16 09:23 char
+crw-------  1 root  root        5,   1 Aug 16 08:52 console
+</code></pre>
+
+<p>See that bus pirate is linked to ttyUSB0.</p>
+
+<p><strong>note:</strong> Using ATTRS{serial}==&ldquo;XXXXXXXX&rdquo; is somehow important because FT232 is a well known IC and lots of devices use that like arduino NG, some programmer boards, USB to UART bridges and &hellip;. So for every device use its own serial number.</p>
+
+<p>At the end watch the asciinema cast for a real live terminal.</p>
+
+<script type="text/javascript" src="https://asciinema.org/a/4xx9764g2vthafmxwlgcuzs9d.js" id="asciicast-4xx9764g2vthafmxwlgcuzs9d" async></script>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="https://vahidtaghiloo.github.io/post/What%20is%20bus%20pirate%20and%20how%20to%20connect%20it%20to%20linux/" data-toggle="tooltip" data-placement="top" title="What is bus pirate and how to connect it to linux">&larr; Previous Post</a>
+        </li>
+        
+        
+      </ul>
+
+      
+
+    </div>
+  </div>
+</div>
+
+      
+
     </div>
 
     <footer>
