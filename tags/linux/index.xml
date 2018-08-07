@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 3v3 volts electronics</title>
-    <link>https://vahidtaghiloo.github.io/post/</link>
-    <description>Recent content in Posts on 3v3 volts electronics</description>
+    <title>Linux on 3v3 volts electronics</title>
+    <link>https://vahidtaghiloo.github.io/tags/linux/</link>
+    <description>Recent content in Linux on 3v3 volts electronics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 07 Aug 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://vahidtaghiloo.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://vahidtaghiloo.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -36,15 +36,6 @@
       
       <guid>https://vahidtaghiloo.github.io/post/what-is-bus-pirate-and-how-to-connect-it-to-linux/</guid>
       <description>The bus pirate is an open source serial terminal bridge developed by Dangerous Prototypes that talks to electronic stuff through the serial port (or USB port). It supports a variety of protocols like 1-wire, I2C, SPI, JTAG, asynchronous serial (UART), raw 2-wire and 3-wire and HD44780 LCD controller. The board is based on a PIC24F microcontroller and has different versions. the current recommended version is 3.6, there is also a version 4 and version 5 (not fully developed yet).</description>
-    </item>
-    
-    <item>
-      <title>First post on my blog</title>
-      <link>https://vahidtaghiloo.github.io/post/first-post-on-my-blog/</link>
-      <pubDate>Wed, 27 Jul 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://vahidtaghiloo.github.io/post/first-post-on-my-blog/</guid>
-      <description>Ok, this is my first post on my first blog. I’m using GitHub/Hugo/github_pages to create it (I will definitely write a post about Hugo). In this blog I’ll write about my projects, working with electronic modules, GNU/Linux, and my hobbies. I’m still learning stuff but bear with me on this, eventually, I will get better. My native language is not English so if you see any misspelling or grammatical errors please feel free to tell me.</description>
     </item>
     
   </channel>

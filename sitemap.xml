@@ -1,29 +1,90 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://vahidtaghiloo.github.io/post/ds18b20-1-wire-interface-with-buspirate/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vahidtaghiloo.github.io/post/set-udev-rules-for-bus-pirate-on-linux/</loc>
+    <lastmod>2016-08-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vahidtaghiloo.github.io/post/what-is-bus-pirate-and-how-to-connect-it-to-linux/</loc>
+    <lastmod>2016-08-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vahidtaghiloo.github.io/post/first-post-on-my-blog/</loc>
+    <lastmod>2016-07-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vahidtaghiloo.github.io/tags/1-wire/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
   <url>
     <loc>https://vahidtaghiloo.github.io/</loc>
-    <lastmod>2016-08-16T08:55:21-04:00</lastmod>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://vahidtaghiloo.github.io/post/Set%20udev%20rules%20for%20bus%20pirate%20on%20Linux/</loc>
-    <lastmod>2016-08-16T08:55:21-04:00</lastmod>
+    <loc>https://vahidtaghiloo.github.io/tags/buspirate/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://vahidtaghiloo.github.io/post/What%20is%20bus%20pirate%20and%20how%20to%20connect%20it%20to%20linux/</loc>
-    <lastmod>2016-08-10T19:18:34-04:00</lastmod>
+    <loc>https://vahidtaghiloo.github.io/categories/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://vahidtaghiloo.github.io/page/about/</loc>
-    <lastmod>2016-08-05T17:24:37-04:00</lastmod>
+    <loc>https://vahidtaghiloo.github.io/tags/debian/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://vahidtaghiloo.github.io/post/First%20post%20on%20my%20blog/</loc>
-    <lastmod>2016-07-27T20:47:19-04:00</lastmod>
+    <loc>https://vahidtaghiloo.github.io/tags/linux/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vahidtaghiloo.github.io/tags/minicom/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vahidtaghiloo.github.io/post/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vahidtaghiloo.github.io/tags/screen/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vahidtaghiloo.github.io/tags/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vahidtaghiloo.github.io/tags/udev-rules/</loc>
+    <lastmod>2016-08-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

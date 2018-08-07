@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 3v3 volts electronics</title>
+    <link>https://vahidtaghiloo.github.io/tags/</link>
+    <description>Recent content in Tags on 3v3 volts electronics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://vahidtaghiloo.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>1 Wire</title>
+      <link>https://vahidtaghiloo.github.io/tags/1-wire/</link>
+      <pubDate>Tue, 07 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vahidtaghiloo.github.io/tags/1-wire/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Buspirate</title>
+      <link>https://vahidtaghiloo.github.io/tags/buspirate/</link>
+      <pubDate>Tue, 07 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vahidtaghiloo.github.io/tags/buspirate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Debian</title>
+      <link>https://vahidtaghiloo.github.io/tags/debian/</link>
+      <pubDate>Tue, 07 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vahidtaghiloo.github.io/tags/debian/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://vahidtaghiloo.github.io/tags/linux/</link>
+      <pubDate>Tue, 07 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vahidtaghiloo.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Minicom</title>
+      <link>https://vahidtaghiloo.github.io/tags/minicom/</link>
+      <pubDate>Tue, 07 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vahidtaghiloo.github.io/tags/minicom/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Screen</title>
+      <link>https://vahidtaghiloo.github.io/tags/screen/</link>
+      <pubDate>Tue, 07 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vahidtaghiloo.github.io/tags/screen/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Udev Rules</title>
+      <link>https://vahidtaghiloo.github.io/tags/udev-rules/</link>
+      <pubDate>Tue, 16 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://vahidtaghiloo.github.io/tags/udev-rules/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
