@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>What is bus pirate and how to connect it to linux</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: #0489B1;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://vahidtaghiloo.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.41" />
+        
+
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">What is bus pirate and how to connect it to linux</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:v.taghiloo@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/vahidtaghiloo/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/VTaghiloo/"><i class="fa fa-twitter"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/what-is-bus-pirate-and-how-to-connect-it-to-linux/">What is bus pirate and how to connect it to linux</a></h4>
+    <h5>August 10, 2016</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p><img src="/img/bus-pirate.png" alt="bus-pirate" /></p>
+
+<p>The bus pirate is an open source serial terminal bridge developed by <a href="http://dangerousprototypes.com">Dangerous Prototypes</a> that talks to electronic stuff through the serial port (or USB port). It supports a variety of protocols like 1-wire, I2C, SPI, JTAG, asynchronous serial (UART), raw 2-wire and 3-wire and HD44780 LCD controller. The board is based on a PIC24F microcontroller and has different versions. the current recommended version is 3.6, there is also a version 4 and version 5 (not fully developed yet). The represented numbers on the pictur are:</p>
+
+<ol>
+<li>mini USB port</li>
+<li>USB RX/TX LED indicator</li>
+<li>Power indicator LED (probably green)</li>
+<li>Mode indicator LED</li>
+<li>Voltage regulator indicator LED</li>
+<li>Output connector (2X5 IDC connector)</li>
+<li>PIC programming connector (in case something goes wrong, probably you won&rsquo;t use it at all)</li>
+</ol>
+
+<h2 id="working-with-the-bus-pirate">Working with the bus pirate</h2>
+
+<p>OK, first you should get a bus pirate board. You can buy it from Dangerous Prototypes or their vendors, you can get a free PCB (parts not included) again from Dangerous Prototypes or you can make your own board because the schematic and PCB are available. I couldn&rsquo;t buy it so I decided to make the PCB myself. As you see in the picture it is a bit different from the original one because I wanted to easily hand solder it so I used larger packages for parts.</p>
+
+<p>bus pirate talks to your computer via an FTDI USB to UART interface IC. We type commands into a serial terminal on the computer, the commands go to the bus pirate, it communicates to the outside world in the selected protocol (based on the commands we typed earlier) and returns the result to the pc.</p>
+
+<p>bus pirate has two modes :</p>
+
+<ol>
+<li>User Terminal mode (user types all the commands himself)</li>
+<li>Binary Scripting Mode (work is done automatically with Python or Perl scripts)</li>
+</ol>
+
+<p>In these series of tutorials we use the first method. for more information on binary mode visit <a href="https://learn.sparkfun.com/tutorials/bus-pirate-v36a-hookup-guide#bsm">Bus Pirate v3.6a Hookup Guide</a></p>
+
+<p>Because bus pirate has a serial interface, it works with many platforms, pc, mac, Linux, even Android. My main os is Debian so I&rsquo;m using it. We also need a terminal emulator. In the Linux world, there are some choices: screen, miniterm, minicom, picocom, &hellip;. In most distros screen is already installed. If not, use <code>$sudo apt-get install screen</code> , or use whatever package manager your distro has. For the first step, we want to know if bus pirate works correctly or not. The bus pirate firmware has a self-test mode. connect the board to the USB port and see if it is recognized. For instance on my laptop:</p>
+
+<pre><code>$lsusb
+Bus 002 Device 002: ID 05ac:8406 Apple, Inc.
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 003: ID 05ac:0291 Apple, Inc.
+Bus 001 Device 006: ID 05ac:828f Apple, Inc.
+Bus 001 Device 002: ID 0a5c:4500 Broadcom Corp. BCM2046B1 USB 2.0 Hub (part of BCM2046 Bluetooth)
+Bus 001 Device 007: ID 0403:6001 Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+</code></pre>
+
+<p>See that a Future Technology Device FT232 USB-Serial (UART) is recognized by pc. The first serial device connected to Linux is named ttyUSB0 or in some distros ttyACM0. obviously, the next serial device would be ttyUSB1 and so on. To find out the serial device name type <code>$sudo cat /var/log/messages | tail</code> in the terminal or simply type <code>$dmesg | tail</code></p>
+
+<pre><code>$sudo cat /var/log/messages | tail
+Aug 10 18:02:37 debian kernel: [ 2445.106227] usbserial: USB Serial support registered for generic
+Aug 10 18:02:37 debian kernel: [ 2445.111095] usbcore: registered new interface driver ftdi_sio
+Aug 10 18:02:37 debian kernel: [ 2445.111125] usbserial: USB Serial support registered for FTDI USB Serial Device
+Aug 10 18:02:37 debian kernel: [ 2445.111340] ftdi_sio 1-1:1.0: FTDI USB Serial Device converter detected
+Aug 10 18:02:37 debian kernel: [ 2445.111453] usb 1-1: Detected FT232RL
+Aug 10 18:02:37 debian kernel: [ 2445.111460] usb 1-1: Number of endpoints 2
+Aug 10 18:02:37 debian kernel: [ 2445.111467] usb 1-1: Endpoint 1 MaxPacketSize 64
+Aug 10 18:02:37 debian kernel: [ 2445.111473] usb 1-1: Endpoint 2 MaxPacketSize 64
+Aug 10 18:02:37 debian kernel: [ 2445.111479] usb 1-1: Setting MaxPacketSize 64
+Aug 10 18:02:37 debian kernel: [ 2445.111842] usb 1-1: FTDI USB Serial Device converter now attached to ttyUSB0
+</code></pre>
+
+<pre><code>$dmesg | tail
+[ 2445.106227] usbserial: USB Serial support registered for generic
+[ 2445.111095] usbcore: registered new interface driver ftdi_sio
+[ 2445.111125] usbserial: USB Serial support registered for FTDI USB Serial Device
+[ 2445.111340] ftdi_sio 1-1:1.0: FTDI USB Serial Device converter detected
+[ 2445.111453] usb 1-1: Detected FT232RL
+[ 2445.111460] usb 1-1: Number of endpoints 2
+[ 2445.111467] usb 1-1: Endpoint 1 MaxPacketSize 64
+[ 2445.111473] usb 1-1: Endpoint 2 MaxPacketSize 64
+[ 2445.111479] usb 1-1: Setting MaxPacketSize 64
+[ 2445.111842] usb 1-1: FTDI USB Serial Device converter now attached to ttyUSB0
+</code></pre>
+
+<p>Both commands show that FTDI is connected to ttyUSB0. Now type <code>$sudo screen /dev/ttyUSB0 115200 8N1</code> and hit enter 2 times. Immediately terminal shows a prompt screen like bellow waiting for commands.</p>
+
+<pre><code>$sudo screen /dev/ttyUSB0 115200 8N1
+HiZ&gt;
+</code></pre>
+
+<p>The initial mode of bus pirate is HiZ (hi impedance) and It means all the inputs are disabled for protection. If you have come this far, probably bus pirate works correctly. The commands are fairly simple: i shows information (firmware version, device id, &hellip;) about bus pirate, ? shows a detailed help menu and m changes bus pirate mode.</p>
+
+<pre><code>HiZ&gt;i
+Bus Pirate v3.5
+Firmware v6.2-beta1 r1981  Bootloader v4.4
+DEVID:0x0447 REVID:0x3046 (24FJ64GA002 B8)
+http://dangerousprototypes.com
+HiZ&gt;?
+ General                                        Protocol interaction
+ ---------------------------------------------------------------------------
+ ?      This help                       (0)     List current macros
+ =X/|X  Converts X/reverse X            (x)     Macro x
+ ~      Selftest                        [       Start
+ #      Reset the BP                    ]       Stop
+ $      Jump to bootloader              {       Start with read
+ &amp;/%    Delay 1 us/ms                   }       Stop
+ a/A/@  AUXPIN (low/HI/READ)            &quot;abc&quot;   Send string
+ b      Set baudrate                    123
+ c/C    AUX assignment (aux/CS)         0x123
+ d/D    Measure ADC (once/CONT.)        0b110   Send value
+ f      Measure frequency               r       Read
+ g/S    Generate PWM/Servo              /       CLK hi
+ h      Commandhistory                  \       CLK lo
+ i      Versioninfo/statusinfo          ^       CLK tick
+ l/L    Bitorder (msb/LSB)              -       DAT hi
+ m      Change mode                     _       DAT lo
+ o      Set output type                 .       DAT read
+ p/P    Pullup resistors (off/ON)       !       Bit read
+ s      Script engine                   :       Repeat e.g. r:10
+ v      Show volts/states               ;       Bits to read/write e.g. 0x55;2
+ w/W    PSU (off/ON)            &lt;x&gt;/&lt;x= &gt;/&lt;0&gt;   Usermacro x/assign x/list all
+HiZ&gt;
+</code></pre>
+
+<p>To self-test the bus pirate, just connect jumpers to the output connector according to the picture and then type ~ (tilda) character in bus pirate command prompt and hit space key to continue.</p>
+
+<p><img src="/img/bus-pirate-selftest.png" alt="bus-pirate-selftest" /></p>
+
+<pre><code>MODE LED OK
+PULLUP H OK
+PULLUP L OK
+VREG OK
+ADC and supply
+5V(4.93) OK
+VPU(4.93) OK
+3.3V(3.21) OK
+ADC(3.20) OK
+Bus high
+MOSI OK
+CLK OK
+MISO OK
+CS OK
+Bus Hi-Z 0
+MOSI OK
+CLK OK
+MISO OK
+CS OK
+Bus Hi-Z 1
+MOSI OK
+CLK OK
+MISO OK
+CS OK
+MODE and VREG LEDs should be on!
+Any key to exit
+Found 0 errors.
+</code></pre>
+
+<p>Well, everything seems OK. To exit screen session hit ctrl+a and then ctrl+d.</p>
+
+<p><strong>note:</strong> <em>as you see copying and pasting terminal output is really ugly and unnecessary, so in the next series of tutorials I will record screencasts instead.</em></p>
+
+<p><strong>update</strong> Now you can watch the asciicast for this tutorial.</p>
+
+<script type="text/javascript" src="https://asciinema.org/a/b0dwoat6ylpe055749bwffq6p.js" id="asciicast-b0dwoat6ylpe055749bwffq6p" async></script>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ssd1306-oled-display-i2c-interface-with-buspirate/">SSD1306 oled display i2c interface with bus pirate</a></h4>
+    <h5>January 18, 2019</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/i2c"><kbd class="item-tag">i2c</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/ssd1306"><kbd class="item-tag">ssd1306</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/oled"><kbd class="item-tag">oled</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ds18b20-1-wire-interface-with-buspirate/">DS18B20 1-Wire interface with bus pirate.</a></h4>
+    <h5>August 7, 2018</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/1-wire"><kbd class="item-tag">1-Wire</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/set-udev-rules-for-bus-pirate-on-linux/">Set udev rules for bus pirate on Linux</a></h4>
+    <h5>August 16, 2016</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/udev-rules"><kbd class="item-tag">udev-rules</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+
+</div>
+ 
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+
