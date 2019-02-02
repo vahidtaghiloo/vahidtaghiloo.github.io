@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SSD1306 oled display i2c interface with bus pirate</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: #0489B1;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://vahidtaghiloo.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.41" />
+        
+
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">SSD1306 oled display i2c interface with bus pirate</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:v.taghiloo@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/vahidtaghiloo/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/VTaghiloo/"><i class="fa fa-twitter"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ssd1306-oled-display-i2c-interface-with-buspirate/">SSD1306 oled display i2c interface with bus pirate</a></h4>
+    <h5>January 18, 2019</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/i2c"><kbd class="item-tag">i2c</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/ssd1306"><kbd class="item-tag">ssd1306</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/oled"><kbd class="item-tag">oled</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/hackaday_logo"><kbd class="item-tag">hackaday_logo</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><p><a href="https:en.wikipedia.org/wiki/I%C2%B2C">I2C</a> is a synchronous serial bus invented by philips semiconductors (now NXP semiconductors). The communication is based on a 7-bit address limited to 112 devices on the bus (There are some reserved addresses). Although some newer devices support 10-bit addressing mode.</p>
+
+<p>I2C protocol uses 2 wires (3 if GND is considered). SDA for synchronous data and SCL for clock line. The clock is always generated by the master. to send data to a slave:</p>
+
+<p>1- Master sends a START condition and a 7 bit address followed by 1-bit read from / write to device. <br />
+2- Master sends data to slave (one bit per clock pulse) <br />
+3- Master sends a STOP condition to slave. <br /></p>
+
+<p><strong>notes:</strong></p>
+
+<p>1- each byte of data is followed by ACK bit (if a valid byte is received by slave) or NACK bit (if a byte is not understood by the slave) <br />
+2- Each byte is transferred MSB first. <br />
+3- Any number of bytes can be transferred between START and STOP condition. <br />
+4- SDA and SCL lines must have 4.7K&#937; - 10K&#937; pull-up resistors. <br /></p>
+
+<p>I made a breakout board for a 32x128 pixel tiny oled. You can download the Altium Designer schematic and pcb files here. The wire connections are shown in the picture. To initialize ssd1306 we need to send a series of commands over i2c. These commands are described in the datasheet. After configuring bus pirate in i2c mode and turning on the power supplies, we send the commands. (watch the asciicast at the end of this post)</p>
+
+<pre><code>[0x78 0x00 0xae 0x81 0x7f 0xa4 0xa6 0x20 0x00 0x21 0x00 0x7f 0x22 0x00 0x03 0x40 0xa0 0xa8 0x1f 0xc8 0xd3 0x00 0xda 0x02 0xd5 0xf0 0xd9 0x22 0xdb 0x20 0x8d 0x14 0xaf]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>[</td>
+<td>An open bracket stands for a START condition</td>
+</tr>
+
+<tr>
+<td>0x78 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>is ssd1306 write address</td>
+</tr>
+
+<tr>
+<td>0x00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>0x00 means all the upcoming bytes are commands</td>
+</tr>
+
+<tr>
+<td>0xae &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set display off</td>
+</tr>
+
+<tr>
+<td>0x81 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set contrast</td>
+</tr>
+
+<tr>
+<td>0x7f &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td></td>
+</tr>
+
+<tr>
+<td>0xa4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>entire display on - resume to RAM content</td>
+</tr>
+
+<tr>
+<td>0xa6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>normal display</td>
+</tr>
+
+<tr>
+<td>0x20 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set memory addressing mode</td>
+</tr>
+
+<tr>
+<td>0x00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>horizontal addressing mode</td>
+</tr>
+
+<tr>
+<td>0x21 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set column address</td>
+</tr>
+
+<tr>
+<td>0x00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>column start address</td>
+</tr>
+
+<tr>
+<td>0x7f &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>column end address</td>
+</tr>
+
+<tr>
+<td>0x22 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set page address</td>
+</tr>
+
+<tr>
+<td>0x00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>page start address</td>
+</tr>
+
+<tr>
+<td>0x03 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>page end address</td>
+</tr>
+
+<tr>
+<td>0x40 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>line0 set display start</td>
+</tr>
+
+<tr>
+<td>0xa0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set seg0 as column address 0</td>
+</tr>
+
+<tr>
+<td>0xa8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set MUX ratio</td>
+</tr>
+
+<tr>
+<td>0x1f &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>MUX ratio set as 31</td>
+</tr>
+
+<tr>
+<td>0xc8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>scan from com0 to com[n-1]</td>
+</tr>
+
+<tr>
+<td>0xd3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set display offset</td>
+</tr>
+
+<tr>
+<td>0x00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>no offset</td>
+</tr>
+
+<tr>
+<td>0xda &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set COM pins configuration</td>
+</tr>
+
+<tr>
+<td>0x02 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td></td>
+</tr>
+
+<tr>
+<td>0xd5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set display clock divide ratio</td>
+</tr>
+
+<tr>
+<td>0xf0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td></td>
+</tr>
+
+<tr>
+<td>0xd9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set pre-charge ratio</td>
+</tr>
+
+<tr>
+<td>0x22 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td></td>
+</tr>
+
+<tr>
+<td>0xdb &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set vcom deselect level</td>
+</tr>
+
+<tr>
+<td>0x20 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>0.77 x vcc</td>
+</tr>
+
+<tr>
+<td>0x8d &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>charge pump setting</td>
+</tr>
+
+<tr>
+<td>0x14 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>enable dc-dc</td>
+</tr>
+
+<tr>
+<td>0xaf &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>set display on</td>
+</tr>
+
+<tr>
+<td>]</td>
+<td>A closed bracket stands for a STOP condition</td>
+</tr>
+</tbody>
+</table>
+
+<p><br />
+What these commands do is that they configure the display. Basically every 8x128 block of pixels is a page. The first page is configured to be on the down side of the display. Data is written in pages to display RAM and the pointer is automatically incremented. At this stage the display must lit some random gibberish pixels. (picture below)</p>
+
+<p>I draw some 6 by 8 letters/glyphs on a checkered paper sheet to show on the display. Enter these byte commands to write &ldquo;HELLO WORLD&rdquo;.</p>
+
+<pre><code>[0x78 0x40 0x7f 0x08 0x08 0x08 0x7f 0x00 0x41 0x7f 0x49 0x41 0x63 0x00 0x41 0x7f 0x41 0x01 0x03 0x00 0x41 0x7f 0x41 0x01 0x03 0x00 0x3e 0x41 0x41 0x41 0x3e 0x00 0x00 0x00 0x00 0x00 0x00 0x00]
+</code></pre>
+
+<p><img src="/img/IMG_8265.JPG" alt="" /></p>
+
+<pre><code>[0x78 0x40 0x7e 0x01 0x0e 0x01 0x7e 0x00 0x3e 0x41 0x41 0x41 0x3e 0x00 0x41 0x7f 0x49 0x4c 0x33 0x00 0x41 0x7f 0x41 0x01 0x03 0x00 0x41 0x7f 0x41 0x22 0x1c 0x00]
+</code></pre>
+
+<p><img src="/img/IMG_8354.JPG" alt="" /></p>
+
+<p>Each column of a letter is a hex number (MSB is top row). The glyphs are 5 by 7 pixels with a row of space on top and a column of space on the right. For example the letter <strong>H</strong> is like this:</p>
+
+<p><img src="/img/H.jpg" alt="" /></p>
+
+<p><strong>note:</strong> <em>take your time to read ssd1306 datasheet and look at this hackaday logo on a 128x64 oled display.</em></p>
+
+<script src="https://asciinema.org/a/224889.js" id="asciicast-224889" async></script>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ds18b20-1-wire-interface-with-buspirate/">DS18B20 1-Wire interface with bus pirate.</a></h4>
+    <h5>August 7, 2018</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/1-wire"><kbd class="item-tag">1-Wire</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/set-udev-rules-for-bus-pirate-on-linux/">Set udev rules for bus pirate on Linux</a></h4>
+    <h5>August 16, 2016</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/udev-rules"><kbd class="item-tag">udev-rules</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/what-is-bus-pirate-and-how-to-connect-it-to-linux/">What is bus pirate and how to connect it to linux</a></h4>
+    <h5>August 10, 2016</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+
+</div>
+ 
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

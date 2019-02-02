@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Set udev rules for bus pirate on Linux</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: #0489B1;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://vahidtaghiloo.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.41" />
+        
+
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Set udev rules for bus pirate on Linux</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:v.taghiloo@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/vahidtaghiloo/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/VTaghiloo/"><i class="fa fa-twitter"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/set-udev-rules-for-bus-pirate-on-linux/">Set udev rules for bus pirate on Linux</a></h4>
+    <h5>August 16, 2016</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/udev-rules"><kbd class="item-tag">udev-rules</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><p>USB serial (UART) peripherals show up as ttyUSB on most Linux distros. The first peripheral is ttyUSB0, the second is ttyUSB1 and so on. On Windows os,  they are named com1, com2 and &hellip;. If you want to have a constant name for every peripheral, for example, /dev/buspirtae, you can set udev rules. Every USB device has a vendor id and a product id.
+<pre><code>$lsusb
+Bus 002 Device 002: ID <strong>05ac:8406</strong> Apple, Inc.
+Bus 002 Device 001: ID <strong>1d6b:0003</strong> Linux Foundation 3.0 root hub
+Bus 001 Device 003: ID <strong>05ac:0291</strong> Apple, Inc.
+Bus 001 Device 006: ID <strong>05ac:828f</strong> Apple, Inc.
+Bus 001 Device 002: ID <strong>0a5c:4500</strong> Broadcom Corp. BCM2046B1 USB 2.0 Hub (part of BCM2046 Bluetooth)
+Bus 001 Device 007: ID <strong>0403:6001</strong> Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
+Bus 001 Device 001: ID <strong>1d6b:0002</strong> Linux Foundation 2.0 root hub
+</code></pre></p>
+
+<p>Hackaday website has a good tutorial to write udev rules <a href="http://hackaday.com/2009/09/18/how-to-write-udev-rules/">here</a>. To set udev rules for buspirate in command line do:</p>
+
+<pre><code>$udevadm info -a -p $(udevadm info -q path -n /dev/ttyUSB0)
+</code></pre>
+
+<p>a lot of text appears on the screen. You only want to find the line containing <code>ATTRS{serial}='XXXXXXXX'</code>. now:</p>
+
+<pre><code>$sudo nano /etc/udev/rules.d/61-buspirate.rules</code></pre>
+
+<p>and type:</p>
+
+<pre><code>SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", \
+ATTRS{serial}=="AH01EH85", MODE:="0666", \
+SYMLINK+="buspirate"
+</code></pre>
+
+<p>pay attention that you should write your device serial number and not mine. You can write any name in front of SYMLINK and the device would show up as that name under /dev. Save and exit by ctrl+o, hit enter and then ctrl+x. now:</p>
+
+<pre><code>$sudo udevadm control --reload-rules</code></pre>
+
+<p>reconnect bus pirate to USB port and type:</p>
+
+<pre><code>$ls -l /dev
+total 0
+crw-------  1 root  root       10, 235 Aug 16 08:52 autofs
+drwxr-xr-x  2 root  root           140 Aug 16 08:52 block
+drwxr-xr-x  2 root  root            80 Aug 16 08:52 bsg
+crw-------  1 root  root       10, 234 Aug 16 08:52 btrfs-control
+drwxr-xr-x  3 root  root            60 Aug 16 08:52 bus
+lrwxrwxrwx  1 root  root             7 Aug 16 09:23 buspirate -> ttyUSB0
+drwxr-xr-x  2 root  root          3120 Aug 16 09:23 char
+crw-------  1 root  root        5,   1 Aug 16 08:52 console
+</code></pre>
+
+<p>See that bus pirate is linked to ttyUSB0.</p>
+
+<p><strong>note:</strong> Using ATTRS{serial}==&ldquo;XXXXXXXX&rdquo; is somehow important because FT232 is a well known IC and lots of devices use that like arduino NG, some programmer boards, USB to UART bridges and &hellip;. So for every device use its own serial number.</p>
+
+<p>At the end watch the asciinema cast for a real live terminal.</p>
+
+<script type="text/javascript" src="https://asciinema.org/a/4xx9764g2vthafmxwlgcuzs9d.js" id="asciicast-4xx9764g2vthafmxwlgcuzs9d" async></script>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ssd1306-oled-display-i2c-interface-with-buspirate/">SSD1306 oled display i2c interface with bus pirate</a></h4>
+    <h5>January 18, 2019</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/i2c"><kbd class="item-tag">i2c</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/ssd1306"><kbd class="item-tag">ssd1306</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/oled"><kbd class="item-tag">oled</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/hackaday_logo"><kbd class="item-tag">hackaday_logo</kbd></a>
+    
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/ds18b20-1-wire-interface-with-buspirate/">DS18B20 1-Wire interface with bus pirate.</a></h4>
+    <h5>August 7, 2018</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/1-wire"><kbd class="item-tag">1-Wire</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/what-is-bus-pirate-and-how-to-connect-it-to-linux/">What is bus pirate and how to connect it to linux</a></h4>
+    <h5>August 10, 2016</h5>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/buspirate"><kbd class="item-tag">buspirate</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/linux"><kbd class="item-tag">linux</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/debian"><kbd class="item-tag">debian</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/screen"><kbd class="item-tag">screen</kbd></a>
+    
+    <a href="https://vahidtaghiloo.github.io/tags/minicom"><kbd class="item-tag">minicom</kbd></a>
+    
+
+</div>
+ 
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+
